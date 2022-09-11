@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="p-5">
+
+    <div class="d-flex mb-3" style="width: 200px;">
+        <input id="txt-todo" type="text" class="form-control" placeholder="todo list">
+        <button id="btn-add" class="btn btn-primary">Add</button>
+    </div>
+    <ul id="render" class="list-group" style="width: 200px;">
+        <!-- <li class="list-group-item">An item</li> -->
+    </ul>
+
+   
+    <script>
+        var count = 0;
+        $(document).ready(() => {
+           $('#btn-add').click(() => {
+                var pass = true;
+                $('#txt-todo').removeClass('is-invalid')
+                if( $('#txt-todo').val().length <= 0 ) {
+                    pass = false;
+                    $('#txt-todo').focus().addClass('is-invalid')
+                    alert('Please fill text')
+                }
+
+                if(pass) {
+                    count++;
+                    var htmlstr = '<li id="list'+count+'" onclick="removelist(this)" class="list-group-item">'+ $('#txt-todo').val() +'</li>'
+                    $('#render').append(htmlstr)
+                    $('#txt-todo').val('')
+                }
+           })
+        })
+
+        function removelist(elem) {
+            console.log(elem)
+            console.log(elem.id)
+            console.log('#'+elem.id)
+            $('#'+elem.id).remove()
+        }
+    </script>
+</body>
+</html>
